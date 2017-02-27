@@ -101,6 +101,33 @@
             $GLOBALS['DB']->exec("DELETE FROM flights WHERE id = {$this->getId()};");
         }
 
+        function getCities()
+        {
+            $queried_cities = $GLOBALS['DB']->query("SELECT cities.* FROM flights JOIN cities_flights ON (cities_flights.id_flight = flights.id) JOIN cities ON (cities.id = cities_flights.id_city_departure OR cities.id = cities_flights.id_city_arrival) WHERE flights.id = {$this->getId()};");
+            $found_cities = array();
+            foreach ($queried_cities as $city)
+            {
+                $city_name = $city['city_name'];
+                $id = $city['id'];
+                $new_city = new City($city_name,$id);
+                array_push($found_cities,$new_city);
+            }
+            return $found_cities;
+        }
+
+        function addCities($departure,$arrival)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO cities_flights (id_flight,id_city_departure, id_city_arrival) VALUES ({$this->getId()},{$departure->getId()},{$arrival->getId()});");
+        }
+
+
+
+
+
+
+
+
+
 
     }
 

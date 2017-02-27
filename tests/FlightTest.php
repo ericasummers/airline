@@ -128,6 +128,26 @@
             $this->assertEquals([$new_flight2], Flight::getAll());
         }
 
+        function test_addCities()
+        {
+            // Arrange
+            $city_name = "Baltimore";
+            $departure = new City($city_name);
+            $departure->save();
+            $city_name2 = "Portland";
+            $arrival = new City($city_name2);
+            $arrival->save();
+
+            $status = "On time";
+            $departure_time = "12:00:00";
+            $arrival_time = "15:00:00";
+            $new_flight = new Flight($status, $departure_time, $arrival_time);
+            $new_flight->save();
+
+            $new_flight->addCities($departure,$arrival);
+
+            $this->assertEquals([$departure,$arrival],$new_flight->getCities());
+        }
 
 
     }
