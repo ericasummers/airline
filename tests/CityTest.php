@@ -76,7 +76,7 @@
             $test_city->save();
             $id = $test_city->getId();
             $city_name2 = "Portland";
-            $test_city->update("city_name",$city_name2);
+            $test_city->updateProperty("city_name",$city_name2);
 
             // Act
             $result_city = City::find($test_city->getId());
@@ -85,6 +85,21 @@
             // Assert
             $this->assertEquals([$city_name2,$id],$result);
 
+        }
+
+        function test_delete()
+        {
+            // Arrange
+            $city_name = "Baltimore";
+            $test_city = new City($city_name);
+            $test_city->save();
+            $city_name2 = "Portland";
+            $test_city2 = new City($city_name2);
+            $test_city2->save();
+
+            $test_city->delete();
+
+            $this->assertEquals([$test_city2], City::getAll());
         }
 
 
