@@ -107,6 +107,27 @@
             $this->assertEquals($expected, $result_array);
         }
 
+        function test_delete()
+        {
+            //Arrange
+            $status = "On time";
+            $departure_time = "12:00:00";
+            $arrival_time = "15:00:00";
+            $new_flight = new Flight($status, $departure_time, $arrival_time);
+            $new_flight->save();
+
+            $status2 = "Delayed";
+            $departure_time2 = "16:00:00";
+            $arrival_time2 = "18:00:00";
+            $new_flight2 = new Flight($status2, $departure_time2, $arrival_time2);
+            $new_flight2->save();
+
+            //Act
+            $new_flight->delete();
+
+            $this->assertEquals([$new_flight2], Flight::getAll());
+        }
+
 
 
     }

@@ -96,6 +96,11 @@
             $this->{$property}=$value;
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM flights WHERE id = {$this->getId()};");
+        }
+
 
     }
 
