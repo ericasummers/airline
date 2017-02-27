@@ -49,6 +49,19 @@
             $GLOBALS['DB']->exec("DELETE FROM cities;");
         }
 
+        static function find($search_id)
+        {
+            $queries = $GLOBALS['DB']->query("SELECT * FROM cities WHERE id = {$search_id};");
+            $return_city = null;
+            foreach ($queries as $query)
+            {
+                $id = $query['id'];
+                $city_name = $query['city_name'];
+                $return_city = new City($city_name,$id);
+            }
+            return $return_city;
+        }
+
     }
 
 

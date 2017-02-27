@@ -51,6 +51,24 @@
             $this->assertEquals([$test_city,$test_city2],$result);
         }
 
+        function test_find()
+        {
+            // Arrange
+            $city_name = "Baltimore";
+            $test_city = new City($city_name);
+            $test_city->save();
+            $city_name2 = "Portland";
+            $test_city2 = new City($city_name2);
+            $test_city2->save();
+
+            // Act
+            $result = City::find($test_city2->getId());
+
+            // Assert
+            $this->assertEquals($test_city2,$result);
+        }
+
+
 
 
     }
