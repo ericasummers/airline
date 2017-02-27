@@ -120,21 +120,7 @@
             $GLOBALS['DB']->exec("INSERT INTO cities_flights (id_flight,id_city_departure, id_city_arrival) VALUES ({$this->getId()},{$departure->getId()},{$arrival->getId()});");
         }
 
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
 
 
 ?>

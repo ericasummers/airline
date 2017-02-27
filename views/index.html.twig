@@ -1,0 +1,67 @@
+{% extends "airline_template.html.twig" %}
+
+{% block controls %}
+    <h3>Enter a new city:</h3>
+    <form action="/add_city" method="post">
+        <div class="form-group">
+            <label for="city_name">City Name:</label>
+            <input type="text" name="city_name" placeholder="Portland">
+        </div>
+        <button type="submit" name="button">Create City</button>
+    </form>
+    <h3>Cities:</h3>
+        <ul>
+
+    {% if cities is not empty %}
+        {% for city in cities %}
+        <li><h4>{{city.getName}}</h4></li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+{% endblock %}
+
+{% block display %}
+
+    {% if cities|length < 2 %}
+        <p>Please enter at least two cities!</p>
+    {% else %}
+        <h3>Enter a new flight:</h3>
+        <form action="/add_flight" method="post">
+            <div class="form-group">
+                <select name="id_city_departure" id="id_city_departure">
+                    {% for city in cities %}
+                    <option value="{{ city.getId }}">{{ city.getName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <select name="id_city_arrival" id="id_city_arrival">
+                    {% for city in cities %}
+                    <option value="{{ city.getId }}">{{ city.getName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="departure_time">Departure Time:</label>
+                <input type="time" name="departure_time" placeholder="12:00">
+            </div>
+            <div class="form-group">
+                <label for="arrival_time">Arrival Time:</label>
+                <input type="time" name="arrival_time" placeholder="15:00">
+            </div>
+            <div class="form-group">
+                <label for="status">Flight Status:</label>
+                <input type="text" name="status" value="On time">
+            </div>
+
+            <button type="submit" class="btn btn-info">Submit Flight</button>
+        </form>
+    {% endif %}
+
+    {% if flights is not empty %}
+        {% for flight in flights %}
+        <h3>Flight {{ flight.getId }}</h3>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
