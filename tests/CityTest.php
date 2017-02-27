@@ -62,7 +62,7 @@
             $test_city2->save();
 
             // Act
-            $result = City::find($test_city2->getId());
+            $result = City::findCity($test_city2->getId());
 
             // Assert
             $this->assertEquals($test_city2,$result);
@@ -79,7 +79,7 @@
             $test_city->updateProperty("city_name",$city_name2);
 
             // Act
-            $result_city = City::find($test_city->getId());
+            $result_city = City::findCity($test_city->getId());
             $result = array($result_city->getName(),$result_city->getId());
 
             // Assert

@@ -74,6 +74,23 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM flights;");
         }
+
+        static function findFlight($search_id)
+        {
+            $queries = $GLOBALS['DB']->query("SELECT * FROM flights WHERE id = {$search_id};");
+            $return = null;
+            foreach ($queries as $query)
+            {
+                $status = $query['status'];
+                $departure_time = $query['departure_time'];
+                $arrival_time = $query['arrival_time'];
+                $id = $query['id'];
+                $return = new Flight($status, $departure_time, $arrival_time, $id);
+            }
+            return $return;
+        }
+
+
     }
 
 
