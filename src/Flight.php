@@ -90,6 +90,12 @@
             return $return;
         }
 
+        function updateProperty($property,$value)
+        {
+            $GLOBALS['DB']->exec("UPDATE flights SET {$property} = '{$value}' WHERE id = {$this->getId()};");
+            $this->{$property}=$value;
+        }
+
 
     }
 
