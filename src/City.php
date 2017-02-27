@@ -62,6 +62,14 @@
             return $return_city;
         }
 
+        function update($property,$value)
+        {
+            $GLOBALS['DB']->exec("UPDATE cities SET {$property} = '{$value}' WHERE id = {$this->getId()};");
+            $this->{$property}=$value;
+        }
+
+
+
     }
 
 
